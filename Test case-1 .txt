@@ -1,0 +1,46 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ProductCategoryNavigationTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the Automation Exercise website
+        driver.get("http://automationexercise.com");
+
+        // Verify that the home page is visible
+        WebElement homePage = driver.findElement(By.xpath("//h1[contains(text(), 'Welcome to Automation Exercise')]"));
+        if (homePage.isDisplayed()) {
+            System.out.println("Home page is visible successfully.");
+        } else {
+            System.out.println("Home page is not visible.");
+        }
+
+        // Click on the product categories (e.g., Electronics, Apparel, Books, etc.)
+        // You can modify the XPath to match the actual product category links
+        WebElement electronicsCategory = driver.findElement(By.xpath("//a[contains(text(), 'Electronics')]"));
+        electronicsCategory.click();
+
+        // Verify that the user has navigated to the Electronics category page
+        WebElement electronicsPage = driver.findElement(By.xpath("//h1[contains(text(), 'Electronics')]"));
+        if (electronicsPage.isDisplayed()) {
+            System.out.println("Successfully navigated to Electronics category.");
+        } else {
+            System.out.println("Failed to navigate to Electronics category.");
+        }
+
+        // Repeat the same steps for other product categories as needed
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+

@@ -1,0 +1,56 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ProductSearchTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the Automation Exercise website
+        driver.get("http://automationexercise.com");
+
+        // Verify that the home page is visible
+        WebElement homePage = driver.findElement(By.xpath("//h1[contains(text(), 'Welcome to Automation Exercise')]"));
+        if (homePage.isDisplayed()) {
+            System.out.println("Home page is visible successfully.");
+        } else {
+            System.out.println("Home page is not visible.");
+        }
+
+        // Click on the "Products" button
+        WebElement productsButton = driver.findElement(By.xpath("//a[contains(text(), 'Products')]"));
+        productsButton.click();
+
+        // Verify that the user is navigated to the ALL PRODUCTS page
+        WebElement allProductsPage = driver.findElement(By.xpath("//h1[contains(text(), 'ALL PRODUCTS')]"));
+        if (allProductsPage.isDisplayed()) {
+            System.out.println("Successfully navigated to ALL PRODUCTS page.");
+        } else {
+            System.out.println("Failed to navigate to ALL PRODUCTS page.");
+        }
+
+        // Enter a product name in the search input
+        WebElement searchInput = driver.findElement(By.id("search_input"));
+        searchInput.sendKeys("your_product_name_here");
+
+        // Click the search button
+        WebElement searchButton = driver.findElement(By.id("search_button"));
+        searchButton.click();
+
+        // Verify that the "SEARCHED PRODUCTS" section is visible
+        WebElement searchedProductsSection = driver.findElement(By.xpath("//h2[contains(text(), 'SEARCHED PRODUCTS')]"));
+        if (searchedProductsSection.isDisplayed()) {
+            System.out.println("SEARCHED PRODUCTS section is visible.");
+        } else {
+            System.out.println("SEARCHED PRODUCTS section is not visible.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}

@@ -1,0 +1,52 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ShoppingCartTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the Automation Exercise website
+        driver.get("http://automationexercise.com");
+
+        // Click on the "Products" button
+        WebElement productsButton = driver.findElement(By.xpath("//a[contains(text(), 'Products')]"));
+        productsButton.click();
+
+        // Add an item to the shopping cart (you can modify the product selection)
+        WebElement addToCartButton = driver.findElement(By.xpath("//button[contains(text(), 'Add to Cart')]"));
+        addToCartButton.click();
+
+        // Verify that the item is added to the cart
+        WebElement cartContents = driver.findElement(By.xpath("//a[contains(text(), 'Cart')]"));
+        cartContents.click();
+
+        // Verify the cart contents (you can adjust the XPath to match the actual cart items)
+        WebElement cartItem = driver.findElement(By.xpath("//div[@class='cart-item']"));
+        if (cartItem.isDisplayed()) {
+            System.out.println("Item added to the cart successfully.");
+        } else {
+            System.out.println("Failed to add item to the cart.");
+        }
+
+        // Remove the item from the cart (you can modify the remove button XPath)
+        WebElement removeButton = driver.findElement(By.xpath("//button[contains(text(), 'Remove')]"));
+        removeButton.click();
+
+        // Verify that the cart is empty
+        WebElement emptyCartMessage = driver.findElement(By.xpath("//p[contains(text(), 'Your cart is empty.')]"));
+        if (emptyCartMessage.isDisplayed()) {
+            System.out.println("Item removed from the cart successfully.");
+        } else {
+            System.out.println("Failed to remove item from the cart.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
